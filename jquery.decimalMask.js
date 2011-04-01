@@ -51,13 +51,13 @@
  */
 (function ($){
 	
-	$.fn.decimalMask = function (mask){
-		
+  $.fn.decimalMask = function (mask){
+    
     if (!mask || !mask.match){
       throw 'Provide some mask to decimalMask plugin please.';
     }
     
-		var
+    var
       a,
       is = (function(){a = mask.match(/[0-9]{1,}/); return a !== null ? a[0].length : 0})(),
       ds = (function(){a = mask.match(/[0-9]{1,}$/); return a !== null ? a[0].length : 0})(),
@@ -74,14 +74,14 @@
       tester = new RegExp('^[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'[0-9]{0,'+ds+'}$|^[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'$|^[0-9]{0,'+is+'}$');
       matcher = new RegExp('[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'[0-9]{0,'+ds+'}|[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'|[0-9]{0,'+is+'}','g');
     }
-		
-		$(this)
+    
+    $(this)
       .attr('maxlength', (is + ds + (sep === null ? 0 : 1)))
       .val($(this).val().replace('.',sep))
       .attr(oldVal,$(this).val())
       .bind('input paste keyup',handler);
-		
-		function handler(e){
+    
+    function handler(e){
       
       var self = $(e.currentTarget);
       
@@ -95,6 +95,6 @@
         self.attr(oldVal,self.val());
       }
 
-		}
-	}
+    }
+  }
 })(jQuery);
