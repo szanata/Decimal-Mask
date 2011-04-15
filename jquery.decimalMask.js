@@ -77,7 +77,7 @@
     $(this)
       .attr('maxlength', (is + ds + (sep === null ? 0 : 1)))
       .val($(this).val().replace('.',sep))
-      .bind('input paste keyup',{ov:$(this).val()},handler);
+      .bind('input paste',{ov:$(this).val()},handler);
     
     function handler(e){
       
