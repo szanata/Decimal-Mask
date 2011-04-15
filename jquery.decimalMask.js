@@ -58,13 +58,12 @@
     }
     
     var
-      a,
-      is = (function(){a = mask.match(/[0-9]{1,}/); return a !== null ? a[0].length : 0})(),
-      ds = (function(){a = mask.match(/[0-9]{1,}$/); return a !== null ? a[0].length : 0})(),
-      sep = (function(){a = mask.match(/,|\./); return a !== null ? a[0] : null})(),
+      v,
+      is = (function(){v = mask.match(/[0-9]{1,}/); return v!== null ? v[0].length : 0})(),
+      ds = (function(){v = mask.match(/[0-9]{1,}$/); return v !== null ? v[0].length : 0})(),
+      sep = (function(){v = mask.match(/,|\./); return v !== null ? v[0] : null})(),
       matcher = null,
-      tester = null,
-      oldVal = 'data-decimalMask-oldValue';
+      tester = null;
     
     if (sep === null){
       tester = new RegExp('^[0-9]{0,'+is+'}$');
@@ -78,21 +77,20 @@
     $(this)
       .attr('maxlength', (is + ds + (sep === null ? 0 : 1)))
       .val($(this).val().replace('.',sep))
-      .attr(oldVal,$(this).val())
-      .bind('input paste keyup',handler);
+      .bind('input paste keyup',{ov:$(this).val()},handler);
     
     function handler(e){
       
       var self = $(e.currentTarget);
       
-      if (self.val() !== self.attr(oldVal)){
+      if (self.val() !== e.data.ov){
       
         if (!tester.test(self.val())){
           var r = self.val().match(matcher);
           self.val(r === null ? '' : r[0]);
           
         }
-        self.attr(oldVal,self.val());
+        e.data.ov = elf.val();
       }
 
     }
