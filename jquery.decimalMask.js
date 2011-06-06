@@ -74,10 +74,12 @@
       matcher = new RegExp('[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'[0-9]{0,'+ds+'}|[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'|[0-9]{0,'+is+'}','g');
     }
     
-    $(this)
-      .attr('maxlength', (is + ds + (sep === null ? 0 : 1)))
-      .val($(this).val().replace('.',sep))
-      .bind('input paste',{ov:$(this).val()},handler);
+    if ($(this).size()){
+      $(this)
+        .attr('maxlength', (is + ds + (sep === null ? 0 : 1)))
+        .val($(this).val().replace('.',sep))
+        .bind('input paste',{ov:$(this).val()},handler);
+    }
     
     function handler(e){
       
@@ -90,7 +92,7 @@
           self.val(r === null ? '' : r[0]);
           
         }
-        e.data.ov = elf.val();
+        e.data.ov = self.val();
       }
 
     }
