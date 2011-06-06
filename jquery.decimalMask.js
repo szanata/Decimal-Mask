@@ -1,7 +1,7 @@
 ﻿/**
  * Decimal Mask Plugin
  * 
- * @version 2
+ * @version 2.0.1
  * 
  * @licensed MIT <see below>
  * @licensed GPL <see below>
