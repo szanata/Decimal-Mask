@@ -1,14 +1,14 @@
-﻿/**
+/**
  * Decimal Mask Plugin
  * 
- * @version 2.0.1
+ * @version 2.1
  * 
  * @licensed MIT <see below>
  * @licensed GPL <see below>
  * 
  * @requires jQuery 1.4.x
  * 
- * @author Stéfano Stypulkowski
+ * @author Stéfano Stypulkowski <http://szanata.com>
  */
 /**
  * MIT License
@@ -50,51 +50,44 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 (function ($){
-	
+  
   $.fn.decimalMask = function (mask){
     
     if (!mask || !mask.match){
       throw 'Provide some mask to decimalMask plugin please.';
     }
-    
+
     var
       v,
       is = (function(){v = mask.match(/[0-9]{1,}/); return v!== null ? v[0].length : 0})(),
       ds = (function(){v = mask.match(/[0-9]{1,}$/); return v !== null ? v[0].length : 0})(),
       sep = (function(){v = mask.match(/,|\./); return v !== null ? v[0] : null})(),
       matcher = null,
-      tester = null;
+      tester = null,
+      events = /.*MSIE 8.*|.*MSIE 7.*|.*MSIE 6.*|.*MSIE 5.*/.test(navigator.userAgent) ? 'keyup propertychange paste' : 'input paste';
     
     if (sep === null){
       tester = new RegExp('^[0-9]{0,'+is+'}$');
       matcher = new RegExp('[0-9]{0,'+is+'}','g');
-      
     }else{
       tester = new RegExp('^[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'[0-9]{0,'+ds+'}$|^[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'$|^[0-9]{0,'+is+'}$');
       matcher = new RegExp('[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'[0-9]{0,'+ds+'}|[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'|[0-9]{0,'+is+'}','g');
     }
-    
-    if ($(this).size()){
-      $(this)
-        .attr('maxlength', (is + ds + (sep === null ? 0 : 1)))
-        .val($(this).val().replace('.',sep))
-        .bind('input paste',{ov:$(this).val()},handler);
-    }
-    
+        
     function handler(e){
-      
       var self = $(e.currentTarget);
-      
       if (self.val() !== e.data.ov){
-      
         if (!tester.test(self.val())){
           var r = self.val().match(matcher);
           self.val(r === null ? '' : r[0]);
-          
         }
-        e.data.ov = self.val();
+        ov = e.data.ov = self.val();
       }
-
     }
+
+    $(this)
+      .attr('maxlength', (is + ds + (sep === null ? 0 : 1)))
+      .val($(this).val().replace('.',sep))
+      .bind(events,{ov:$(this).val()},handler);
   }
 })(jQuery);
