@@ -2,14 +2,14 @@
 
 # Changelog
 
-- version 2.1:
-  * now supported in early Ie versions: 8, 7, 6 and 5.5.
-  * the mask can be binded to an element the isn't on the DOM tree yet.
+- **version 2.1:**
+  - now supported in early Ie versions: 8, 7, 6 and 5.5.
+  - the mask can be binded to an element the isn't on the DOM tree yet.
 
-- version 2.0.1:(I didn't documented)
+- **version 2.0.1:**(I didn't documented)
 
-- version 2:
-  * Total rewrote, now based on regex replace.
+- **version 2:**
+  - Total rewritten, now based on regex replace.
   
 # Description
 
