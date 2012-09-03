@@ -2,6 +2,9 @@
 
 # Changelog
 
+- **versions 2.2:**
+  - Fixed: An empty selector doesn't throw an JS error anymore. Issue #4.
+
 - **version 2.1:**
   - Now supported in early IE versions: 8, 7, 6 and 5.5.
   - The mask can be binded to an element that isn't on the DOM tree yet.
