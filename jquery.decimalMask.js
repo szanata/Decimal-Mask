@@ -1,7 +1,7 @@
 /**
  * Decimal Mask Plugin
  * 
- * @version 2.1
+ * @version 2.2
  * 
  * @licensed MIT <see below>
  * @licensed GPL <see below>
@@ -85,9 +85,9 @@
       }
     }
 
-    $(this)
+    this
       .attr('maxlength', (is + ds + (sep === null ? 0 : 1)))
-      .val($(this).val().replace('.',sep))
-      .bind(events,{ov:$(this).val()},handler);
+      .val(this.val() ? this.val().replace('.',sep) : this.val())
+      .bind(events,{ov:this.val()},handler);
   }
 })(jQuery);
