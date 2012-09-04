@@ -2,6 +2,9 @@
 
 # Changelog
 
+- **versions 2.2.1:**
+  - Now using '.on' instead of deprecated '.live'.
+
 - **versions 2.2:**
   - Fixed: An empty selector doesn't throw an JS error anymore. Issue #4.
 
