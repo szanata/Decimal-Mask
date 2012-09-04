@@ -88,6 +88,6 @@
     this
       .attr('maxlength', (is + ds + (sep === null ? 0 : 1)))
       .val(this.val() ? this.val().replace('.',sep) : this.val())
-      .bind(events,{ov:this.val()},handler);
+      .on(events,{ov:this.val()},handler);
   }
 })(jQuery);
