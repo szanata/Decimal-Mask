@@ -7,7 +7,6 @@
 
 - **version 2.1:**
   - Now supported in early IE versions: 8, 7, 6 and 5.5.
-  - The mask can be binded to an element that isn't on the DOM tree yet.
 
 - **version 2.0.1:**
   - Small bug resolved (I didn't documented very well).
