@@ -2,10 +2,16 @@
 
 # Changelog
 
-- **versions 2.2.1:**
+- **version 3**
+  - Added: supporting for negative numbers using '-' prefix on the mask (issue #5);
+  - Fixed: inputting some invalid char in the middle of input content was causing the loss of all content on the right of the cursor (issue #3);
+  - Added: strict mode;
+  - Fixed: the first character inputed to field was throwing an error.
+
+- **version 2.2.1:**
   - Now using '.on' instead of deprecated '.live'.
 
-- **versions 2.2:**
+- **version 2.2:**
   - Fixed: An empty selector doesn't throw an JS error anymore. Issue #4.
 
 - **version 2.1:**
