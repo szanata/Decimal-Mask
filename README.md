@@ -7,22 +7,16 @@
   - Fixed: inputting some invalid char in the middle of input content was causing the loss of all content on the right of the cursor (issue #3);
   - Added: strict mode;
   - Fixed: the first character inputed to field was throwing an error.
-
 - **version 2.2.1:**
   - Now using '.on' instead of deprecated '.live'.
-
 - **version 2.2:**
   - Fixed: An empty selector doesn't throw an JS error anymore. Issue #4.
-
 - **version 2.1:**
   - Now supported in early IE versions: 8, 7, 6 and 5.5.
-
 - **version 2.0.1:**
   - Small bug resolved (I didn't documented very well).
-
 - **version 2:**
   - Total rewritten, now based on regex replace.
-  
 # Description
 
 This plugin just provides a decimal mask to an HTML input.
@@ -50,4 +44,6 @@ Some valid masks are:
   * 999
   * 999,99
   * ,999
+  * -999
+  * -99,99
   * You got it...
