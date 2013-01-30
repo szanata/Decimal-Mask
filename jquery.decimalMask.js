@@ -1,7 +1,7 @@
 /**
  * Decimal Mask Plugin
  * 
- * @version 3
+ * @version 3.1
  * 
  * @licensed MIT <see below>
  * @licensed GPL <see below>
@@ -64,14 +64,10 @@
       is = (function(){v = mask.match(/[0-9]{1,}/); return v !== null ? v[0].length : 0})(),
       ds = (function(){v = mask.match(/[0-9]{1,}$/); return v !== null ? v[0].length : 0})(),
       sep = (function(){v = mask.match(/,|\./); return v !== null ? v[0] : null})(),
-      tester = null,
-      events = /.*MSIE 8.*|.*MSIE 7.*|.*MSIE 6.*|.*MSIE 5.*/.test(navigator.userAgent) ? 'keyup propertychange paste' : 'input paste';
-    
-    if (sep === null){
-      tester = new RegExp('^'+neg+'[0-9]{0,'+is+'}$');
-    }else{
-      tester = new RegExp('^'+neg+'[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'[0-9]{0,'+ds+'}$|^'+neg+'[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'$|^'+neg+'[0-9]{0,'+is+'}$');
-    }
+      events = /.*MSIE 8.*|.*MSIE 7.*|.*MSIE 6.*|.*MSIE 5.*/.test(navigator.userAgent) ? 'keyup propertychange paste' : 'input paste',
+      tester = (sep === null) 
+        ? new RegExp('^'+neg+'[0-9]{0,'+is+'}$')
+        : new RegExp('^'+neg+'[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'[0-9]{0,'+ds+'}$|^'+neg+'[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'$|^'+neg+'[0-9]{0,'+is+'}$');
         
     function handler(e){
       var self = $(e.currentTarget);
@@ -83,9 +79,11 @@
       }
     }
 
-    this
-      .attr('maxlength', is + ds + (sep === null ? 0 : 1) + (neg === '' ? 0 : 1 ))
-      .val(this.val() ? this.val().replace('.',sep) : this.val())
-      .on(events,{ov:this.val()},handler);
+    this.each(function (){
+      $(this)
+        .attr('maxlength', is + ds + (sep === null ? 0 : 1) + (neg === '' ? 0 : 1 ))
+        .val($(this).val() ? $(this).val().replace('.',sep) : $(this).val())
+        .on(events,{ov:$(this).val()},handler);
+    });
   }
 })(jQuery);

@@ -2,6 +2,9 @@
 
 # Changelog
 
+- **version 3.1**
+  - Fixed: all input nodes was receiving the value of the first when the plugin was initiated
+
 - **version 3**
   - Added: supporting for negative numbers using '-' prefix on the mask (issue #5);
   - Fixed: inputting some invalid char in the middle of input content was causing the loss of all content on the right of the cursor (issue #3);
@@ -42,7 +45,24 @@ The separator supported are the "," or ".". (I don't believe there is another ty
 The usage is simple:
 
       $('your selector').decimalMask('your mask');
- 
+      
+This is ok for most cases! 
+But, sometimes, you want to set the mask for each input on the HTML itself. To do that, you can write something like this:
+
+      <input data-mask="999.99"/>
+      <input data-mask="-999.99"/>
+      <input data-mask="999"/>
+      
+And, in your javascript:
+
+      $('[data-mask]').each(function (){
+        $(this).decimalMask($(this).attr('data-mask'));
+      });
+
+Done! Now your code is more generic o/
+
+# Masks
+
 Some valid masks are:
 
   * 999.99
