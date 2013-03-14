@@ -1,6 +1,6 @@
 {
   "name":"Decimal-Mask",
-  "version":"3.1.0",
+  "version":"3.1.1",
   "title":"Decimal formatting for inputs",
   "author":{
       "name": "Stéfano Stypulkowski",
@@ -16,6 +16,10 @@
       "url": "http://www.szanata.com/licenses/mit.txt"
     }
   ],
+  "bugs": "https://github.com/madeinstefano/Decimal-Mask/issues",
+  "homepage": "https://github.com/madeinstefano/Decimal-Mask",
+  "docs": "https://github.com/madeinstefano/Decimal-Mask",
+  "download": "https://raw.github.com/madeinstefano/Decimal-Mask/master/jquery.decimalMask.min.js",
   "dependencies":{
     "jquery":">=1.8"
   }
