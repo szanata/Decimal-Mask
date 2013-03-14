@@ -1,0 +1,22 @@
+{
+  "name":"Decimal-Mask",
+  "version":"3.1.0",
+  "title":"Decimal formatting for inputs",
+  "author":{
+      "name": "Stéfano Stypulkowski",
+      "url": "https://szanata.com/"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.szanata.com/licenses/gpl.txt"
+    },
+    {
+      "type": "MIT",
+      "url": "http://www.szanata.com/licenses/mit.txt"
+    }
+  ],
+  "dependencies":{
+    "jquery":">=1.8"
+  }
+}
