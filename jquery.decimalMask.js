@@ -64,7 +64,7 @@
       is = (function(){v = mask.match(/[0-9]{1,}/); return v !== null ? v[0].length : 0})(),
       ds = (function(){v = mask.match(/[0-9]{1,}$/); return v !== null ? v[0].length : 0})(),
       sep = (function(){v = mask.match(/,|\./); return v !== null ? v[0] : null})(),
-      events = /.*MSIE 8.*|.*MSIE 7.*|.*MSIE 6.*|.*MSIE 5.*/.test(navigator.userAgent) ? 'keyup propertychange paste' : 'input paste',
+      events = /.*MSIE 8.*|.*MSIE 7.*|.*MSIE 6.*|.*MSIE 5.*/.test(navigator.userAgent) ? 'keyup.mask propertychange.mask paste.mask' : 'input.mask paste.mask',
       tester = (sep === null) 
         ? new RegExp('^'+neg+'[0-9]{0,'+is+'}$')
         : new RegExp('^'+neg+'[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'[0-9]{0,'+ds+'}$|^'+neg+'[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'$|^'+neg+'[0-9]{0,'+is+'}$');
