@@ -2,6 +2,10 @@
 
 # Changelog
 
+- **version 4**
+  - Added: Complete rewrite, with simplier and better code
+  - Added: Self initialize when the attribute "data-d-mask" is present, using its value
+
 - **version 3.1**
   - Fixed: all input nodes was receiving the value of the first when the plugin was initiated
 
@@ -10,22 +14,28 @@
   - Fixed: inputting some invalid char in the middle of input content was causing the loss of all content on the right of the cursor (issue #3);
   - Added: strict mode;
   - Fixed: the first character inputed to field was throwing an error.
+
 - **version 2.2.1:**
   - Now using '.on' instead of deprecated '.live'.
+
 - **version 2.2:**
   - Fixed: An empty selector doesn't throw an JS error anymore. Issue #4.
+
 - **version 2.1:**
   - Now supported in early IE versions: 8, 7, 6 and 5.5.
+
 - **version 2.0.1:**
   - Small bug resolved (I didn't documented very well).
+
 - **version 2:**
   - Total rewritten, now based on regex replace.
+
 # Description
 
 This plugin just provides a decimal mask to an HTML input.
 It treats only the decimal separator, it can't handle thousand separators.
 It can apply the separator in the value given by the backend on web apps.
-The separator supported are the "," or ".". (I don't believe there is another types);
+The separator supported are the "," or ".". (I don't believe there are another types)
 
 # Compatible browsers:
   * Opera 10+ (Old versions not tested)
@@ -39,21 +49,10 @@ The separator supported are the "," or ".". (I don't believe there is another ty
 The usage is simple:
 
       $('your selector').decimalMask('your mask');
-      
-This is ok for most cases! 
-But, sometimes, you want to set the mask for each input on the HTML itself. To do that, you can write something like this:
 
-      <input data-mask="999.99"/>
-      <input data-mask="-999.99"/>
-      <input data-mask="999"/>
-      
-And, in your javascript:
+  or **NEW**
 
-      $('[data-mask]').each(function (){
-        $(this).decimalMask($(this).attr('data-mask'));
-      });
-
-Done! Now your code is more generic o/
+      <input data-d-mask="999" />
 
 # Masks
 

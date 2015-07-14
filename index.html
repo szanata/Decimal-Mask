@@ -3,19 +3,48 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     
-    <title>Decimal Mask 3.1</title>
+    <title>Decimal Mask 4</title>
     
     <script src="jquery-1.9.0.min.js"></script>
     <script src="jquery.decimalMask.min.js"></script>
-    
-    <script>
-      $(function (){
-        $('input').decimalMask('-999,99');
-      });
-    </script>
+
+    <style>
+      body {
+        font-family: arial;
+      }
+    </style>
   </head>
   <body>
+    <h1>Decimal Mask examples</h1>
+    <hr></hr>
+
+    <h2>#1</h2>
+    <p>Code:</p>
+    <code>$('#input1').decimalMask('-999,99');</code>
+    <p>Result:</p>
     <input id="input1" value="2"/>
+    <hr></hr>
+
+    <h2>#2</h2>
+    <p>Code:</p>
+    <span>$('#input2').decimalMask('999.99');</span>
+    <p>Result:</p>
     <input id="input2" value="3"/>
+    <hr></hr>
+
+    <h2>#3</h2>
+    <p>Code:</p>
+    <span>&lt;input value="3" data-d-mask="99" /&gt;</span>
+    <input id="input2" value="3" data-d-mask="99" />
+    <hr></hr>
+
+    <script>
+      $(function (){
+        
+        $('#input1').decimalMask('-999,99');
+        $('#input2').decimalMask('999.99');
+
+      });
+    </script>
   </body>
 </html>

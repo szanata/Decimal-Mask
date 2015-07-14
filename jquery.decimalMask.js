@@ -1,12 +1,12 @@
 /**
  * Decimal Mask Plugin
  * 
- * @version 3.1.1
+ * @version 4
  * 
  * @licensed MIT <see below>
  * @licensed GPL <see below>
  * 
- * @requires jQuery 1.4.x
+ * @requires jQuery 1.4 or up
  * 
  * @author Stéfano Stypulkowski <http://szanata.com>
  */
@@ -51,39 +51,52 @@
  */
 (function ($){
   'use strict';
-  
+
   $.fn.decimalMask = function (mask){
     
-    if (!mask || !mask.match){
-      throw 'decimalMask: you must set the mask string.';
+    if (!mask || !mask.match) {
+      throw 'decimalMask: You must provide a mask as String.';
+    }
+
+    if (!/^(-)?\d+((\.|,)\d*)?$/.test(mask)) {
+      throw 'decimalMask: Invalid mask, must be like \\d+((\\.|,)\\d*)?';
     }
 
     var
-      v,
-      neg = /^-/.test(mask) ? '(-)?' : '',
-      is = (function(){v = mask.match(/[0-9]{1,}/); return v !== null ? v[0].length : 0})(),
-      ds = (function(){v = mask.match(/[0-9]{1,}$/); return v !== null ? v[0].length : 0})(),
-      sep = (function(){v = mask.match(/,|\./); return v !== null ? v[0] : null})(),
+      v, d,
+      negative = /^-/.test(mask) ? '(-)?' : '',
+      separator = !(v = mask.match(/,|\./)) ? null : v[0],
+      integerLength = mask.split(separator)[0].replace('-','').length,
+      decimalLength = !(d = mask.split(separator)[1]) ? null : d.length,
       events = /.*MSIE 8.*|.*MSIE 7.*|.*MSIE 6.*|.*MSIE 5.*/.test(navigator.userAgent) ? 'keyup propertychange paste' : 'input paste',
-      tester = (sep === null) 
-        ? new RegExp('^'+neg+'[0-9]{0,'+is+'}$')
-        : new RegExp('^'+neg+'[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'[0-9]{0,'+ds+'}$|^'+neg+'[0-9]{0,'+is+'}'+(sep === '.' ? '\\.' : ',')+'$|^'+neg+'[0-9]{0,'+is+'}$');
+      testerExp = '^' + negative + '\\d{0,' + integerLength + '}' + (decimalLength ? '(\\' + separator + '\\d{0,' + decimalLength + '})?$' : '$'),
+      tester = new RegExp(testerExp);
         
-    function handler(e){
+    function handler(e) {
       var self = $(e.currentTarget);
-      if (self.val() !== e.data.ov){
+      if (self.val() !== e.data.oldValue){
         if (!tester.test(self.val())){
-          self.val(e.data.ov);
+          self.val(e.data.oldValue);
         }
-        e.data.ov = self.val();
+        e.data.oldValue = self.val();
       }
     }
 
     this.each(function (){
-      $(this)
-        .attr('maxlength', is + ds + (sep === null ? 0 : 1) + (neg === '' ? 0 : 1 ))
-        .val($(this).val() ? $(this).val().replace('.',sep) : $(this).val())
-        .on(events,{ov:$(this).val()},handler);
+      var length = integerLength + (separator ? 1 : 0) + (decimalLength || 0) + (negative ? 1 : 0)
+      $(this).attr('maxlength', length).on(events, { oldValue: $(this).val() }, handler);
+
+      if (separator) {
+        $(this).val($(this).val().replace('.', separator));
+      }
     });
   }
+
 })(jQuery);
+
+// auto start fields with data-d-mask attr
+$(function () {
+  $('[data-d-mask]').each(function () {
+    $(this).decimalMask($(this).attr('data-d-mask'));
+  });
+})
